@@ -1,7 +1,8 @@
 const { body, validationResult }
     = require('express-validator');
 const express = require('express');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+const { hidden } = require('colors');
 const app = express();
 var code = 420;
 
@@ -24,25 +25,8 @@ app.get('/index', (req, res) => {
 // app.get('/', (req, res, next) => {
 //     res.sendFile(__dirname + '/index.html');
 // });
-app.post('/submit', [
-    body('firstName')
-        .not()
-        .isEmpty()
-        .withMessage('Name is required'),
-    body('lastName')
-        .not()
-        .isEmpty()
-        .withMessage('lastName is required'),
-    body('email').isEmail().normalizeEmail(),
-], (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        res.json(errors)
-    }
-    else {
-        res.send("Successfully validated")
-    }
-    res.sendStatus(200);
-});
-// app.use('/', route);
+
 app.listen(8001);
+
+
+
